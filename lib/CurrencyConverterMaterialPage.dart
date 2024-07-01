@@ -19,10 +19,11 @@ class Currency extends StatefulWidget{ // These classes are mutable!
   State<Currency> createState() => _CurrencyConverterPageState();
 }
 
+
+
 class _CurrencyConverterPageState extends State<Currency> {
   // why am i keeping it private? its because it should not be accessible
   //by other files and should only be extended to createState in gratefullest vala class
-
   String str = "";
   double result = 0;
   final TextEditingController textEditingController = TextEditingController();
@@ -30,6 +31,12 @@ class _CurrencyConverterPageState extends State<Currency> {
   // If we want something to be processed before the build function is called we use
   // void initState
 
+  @override
+  void dispose()
+  {
+    textEditingController.dispose(); // To avoid memory leaks !
+    super.dispose();
+  }
 
 
   // Your build function should be as less expensive as it can be as
@@ -71,7 +78,7 @@ class _CurrencyConverterPageState extends State<Currency> {
                  ),
                  Flexible(
 
-                     child: Text('$result', style :  const TextStyle(fontSize: 50, fontWeight: FontWeight.bold))),
+                     child: Text(result !=0 ? result.toStringAsFixed(2):result.toStringAsFixed(0), style :  const TextStyle(fontSize: 50, fontWeight: FontWeight.bold))),
                ],
 
              ),
